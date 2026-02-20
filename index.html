@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FThrift</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav>
+    <div class="logo">Thrift<span> ni C</span></div>
+    <ul class="nav-links">
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#products">Shop</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">
+        🛍️ Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#categories" onclick="closeMobileNav()">Categories</a>
+    <a href="#products" onclick="closeMobileNav()">Shop</a>
+    <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  </div>
+
+  <!-- ==================== HERO (Full-Screen Video Background) ==================== -->
+  <section class="hero">
+
+    <!-- Background video — autoplay, muted, loops endlessly -->
+    <div class="hero-video-wrap">
+  <video
+    class="hero-video"
+    id="heroVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="images/hero-cap.jpg"
+  >
+    <source src="videos/hero.mp4" type="video/mp4">
+  </video>
+  <!-- Dark cinematic overlay -->
+  <div class="hero-video-overlay"></div>
+</div>
+
+    <!-- Content layered over the video -->
+    <div class="hero-content">
+      <div class="hero-tag">✨ Vintage &amp; Pre-loved</div>
+      <h1 class="hero-title">Find Your<br><span class="accent">Unique</span><br>Style</h1>
+      <p class="hero-sub">Discover one-of-a-kind thrifted fashion — caps, kicks, shirts, hoodies and more. Sustainable. Affordable. Iconic.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn-primary">Shop Now</a>
+        <a href="#categories" class="btn-outline btn-outline-light">Browse Categories</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">500+</span>
+          <span class="stat-label">Items</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">80%</span>
+          <span class="stat-label">Off Retail</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Authentic</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mute / Unmute button -->
+    <button class="mute-btn" id="muteBtn" onclick="toggleMute()" title="Toggle sound">🔇</button>
+
+    <!-- Animated scroll cue -->
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+
+  </section>
+
+  <!-- ==================== CATEGORIES ==================== -->
+  <section class="section" id="categories">
+    <div class="section-inner">
+      <h2 class="section-title">Browse by Category</h2>
+      <p class="section-sub">What are you looking for today?</p>
+      <div class="categories-grid">
+        <div class="cat-card active" onclick="filterProducts('all', this)">
+          <span class="cat-icon">🏷️</span>
+          <div class="cat-name">All Items</div>
+          <div class="cat-count">24 items</div>
+        </div>
+        <div class="cat-card" onclick="filterProducts('cap', this)">
+          <span class="cat-icon">🧢</span>
+          <div class="cat-name">Caps & Hats</div>
+          <div class="cat-count">6 items</div>
+        </div>
+        <div class="cat-card" onclick="filterProducts('shoes', this)">
+          <span class="cat-icon">👟</span>
+          <div class="cat-name">Shoes</div>
+          <div class="cat-count">6 items</div>
+        </div>
+        <div class="cat-card" onclick="filterProducts('shirt', this)">
+          <span class="cat-icon">👕</span>
+          <div class="cat-name">Shirts & Tees</div>
+          <div class="cat-count">6 items</div>
+        </div>
+        <div class="cat-card" onclick="filterProducts('hoodie', this)">
+          <span class="cat-icon">🧥</span>
+          <div class="cat-name">Jacket / Hoodie</div>
+          <div class="cat-count">6 items</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PRODUCTS ==================== -->
+  <section class="section products-section" id="products">
+    <div class="products-header">
+      <div>
+        <h2 class="section-title">Our Collection</h2>
+        <p class="section-sub">All pieces are curated and quality-checked</p>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="sortProducts('newest', this)">Newest</button>
+        <button class="filter-tab" onclick="sortProducts('price-low', this)">Price: Low</button>
+        <button class="filter-tab" onclick="sortProducts('price-high', this)">Price: High</button>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- ==================== PROMO BANNER ==================== -->
+  <section class="promo-banner">
+    <h2>Thrift is <span>Trendy</span></h2>
+    <p>New drops every week. Follow us and never miss a deal.</p>
+    <a href="#contact" class="btn-primary btn-accent">Get Notified</a>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="section contact-section" id="contact">
+    <div class="contact-inner">
+      <div>
+        <h2 class="contact-title">Let's <span>Connect</span></h2>
+        <p class="contact-desc">Have questions about an item? Want to sell your pre-loved clothes? Reach out through any of our channels — we respond fast! 💬</p>
+      </div>
+      <div class="contact-cards">
+        <a href="https://www.facebook.com/ciejay.luna.2025" target="_blank" class="contact-card fb">
+          <div class="contact-icon">📘</div>
+          <div class="contact-card-text">
+            <strong>Facebook</strong>
+            <span>Ciejay Luna</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="https://www.instagram.com/_cjyln/" target="_blank" class="contact-card ig">
+          <div class="contact-icon">📸</div>
+          <div class="contact-card-text">
+            <strong>Instagram</strong>
+            <span>_cjyln</span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+        <a href="gmail.com" class="contact-card email">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-card-text">
+            <strong>Email Us</strong>
+            <span><span class="__cf_email__" data-cfemail="cjayyluna5555@gmail.com">[email&#160;protected]</span></span>
+          </div>
+          <span class="contact-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    Made with ♥ by <strong>Thrift ni c</strong> — Sustainable Fashion © 2025
+  </footer>
+
+  <!-- ==================== CART SIDEBAR ==================== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart 🛍️</div>
+      <button class="close-btn" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <div>Your cart is empty.<br><small>Start adding items!</small></div>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cartTotal">₱0</strong>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Checkout — Pay Now</button>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST ==================== -->
+  <div class="toast" id="toast">✅ Added to cart!</div>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script src="script.js"></script>
+
+</body>
+</html>
